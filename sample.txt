@@ -1,0 +1,9 @@
+label1:
+add r1, r2, r3
+add r2, r2, r2
+label2:
+add r5, r6, r6
+mov r1, r1 ,r3
+label3:
+;some more stuff
+
