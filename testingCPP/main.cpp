@@ -32,76 +32,91 @@ using namespace std;
  location. I have to convert to hex.
  */
 
-
-void insertM(map<string, string> a, string b, string c) {
-    a.insert(make_pair(b, c));
-}
-
 map<string, string> opDictionary() {
     map<string, string> opCodeDictionary;
-    insertM(opCodeDictionary, "j", "000010");
-    insertM(opCodeDictionary, "jal", "000011");
-    insertM(opCodeDictionary, "beqz", "000100");
-    insertM(opCodeDictionary, "bnez", "000101");
-    insertM(opCodeDictionary, "addi", "001000");
-    insertM(opCodeDictionary, "addui", "001001");
-    insertM(opCodeDictionary, "subi", "001010");
-    insertM(opCodeDictionary, "subui", "001011");
-    insertM(opCodeDictionary, "andi", "001100");
-    insertM(opCodeDictionary, "ori", "001101");
-    insertM(opCodeDictionary, "xori", "001110");
-    insertM(opCodeDictionary, "lhi", "001111");
-    insertM(opCodeDictionary, "jr", "010010");
-    insertM(opCodeDictionary, "jalr", "010011");
-    insertM(opCodeDictionary, "seqi", "011000");
-    insertM(opCodeDictionary, "snei", "011001");
-    insertM(opCodeDictionary, "slti", "011010");
-    insertM(opCodeDictionary, "sgti", "011011");
-    insertM(opCodeDictionary, "slei", "011100");
-    insertM(opCodeDictionary, "sgei", "011101");
-    insertM(opCodeDictionary, "lb", "100000");
-    insertM(opCodeDictionary, "lh", "100001");
-    insertM(opCodeDictionary, "lw", "100011");
-    insertM(opCodeDictionary, "lbu", "100100");
-    insertM(opCodeDictionary, "lhu", "100101");
-    insertM(opCodeDictionary, "sb", "101000");
-    insertM(opCodeDictionary, "sh", "101001");
-    insertM(opCodeDictionary, "sw", "101011");
-    insertM(opCodeDictionary, "sequi", "110000");
-    insertM(opCodeDictionary, "sneui", "110001");
-    insertM(opCodeDictionary, "sltui", "110010");
-    insertM(opCodeDictionary, "sgtui", "110011");
-    insertM(opCodeDictionary, "sleui", "110100");
-    insertM(opCodeDictionary, "sgeui", "110101");
-    insertM(opCodeDictionary, "slli", "110110");
-    insertM(opCodeDictionary, "srli", "110111");
-    insertM(opCodeDictionary, "srai", "111000");
+    opCodeDictionary.insert(make_pair("j", "000010"));
+    opCodeDictionary.insert(make_pair("jal", "000011"));
+    opCodeDictionary.insert(make_pair("beqz", "000100"));
+    opCodeDictionary.insert(make_pair("bnez", "000101"));
+    opCodeDictionary.insert(make_pair("addi", "001000"));
+    opCodeDictionary.insert(make_pair("addui", "001001"));
+    opCodeDictionary.insert(make_pair("subi", "001010"));
+    opCodeDictionary.insert(make_pair("subui", "001011"));
+    opCodeDictionary.insert(make_pair("andi", "001100"));
+    opCodeDictionary.insert(make_pair("ori", "001101"));
+    opCodeDictionary.insert(make_pair("xori", "001110"));
+    opCodeDictionary.insert(make_pair("lhi", "001111"));
+    opCodeDictionary.insert(make_pair("jr", "010010"));
+    opCodeDictionary.insert(make_pair("jalr", "010011"));
+    opCodeDictionary.insert(make_pair("seqi", "011000"));
+    opCodeDictionary.insert(make_pair("snei", "011001"));
+    opCodeDictionary.insert(make_pair("slti", "011010"));
+    opCodeDictionary.insert(make_pair("sgti", "011011"));
+    opCodeDictionary.insert(make_pair("slei", "011100"));
+    opCodeDictionary.insert(make_pair("sgei", "011101"));
+    opCodeDictionary.insert(make_pair("lb", "100000"));
+    opCodeDictionary.insert(make_pair("lh", "100001"));
+    opCodeDictionary.insert(make_pair("lw", "100011"));
+    opCodeDictionary.insert(make_pair("lbu", "100100"));
+    opCodeDictionary.insert(make_pair("lhu", "100101"));
+    opCodeDictionary.insert(make_pair("sb", "101000"));
+    opCodeDictionary.insert(make_pair("sh", "101001"));
+    opCodeDictionary.insert(make_pair("sw", "101011"));
+    opCodeDictionary.insert(make_pair("sequi", "110000"));
+    opCodeDictionary.insert(make_pair("sneui", "110001"));
+    opCodeDictionary.insert(make_pair("sltui", "110010"));
+    opCodeDictionary.insert(make_pair("sgtui", "110011"));
+    opCodeDictionary.insert(make_pair("sleui", "110100"));
+    opCodeDictionary.insert(make_pair("sgeui", "110101"));
+    opCodeDictionary.insert(make_pair("slli", "110110"));
+    opCodeDictionary.insert(make_pair("srli", "110111"));
+    opCodeDictionary.insert(make_pair("srai", "111000"));
+    opCodeDictionary.insert(make_pair("sll", "000000"));
+    opCodeDictionary.insert(make_pair("srl", "000000"));
+    opCodeDictionary.insert(make_pair("sra", "000000"));
+    opCodeDictionary.insert(make_pair("sltu", "000000"));
+    opCodeDictionary.insert(make_pair("sgtu", "000000"));
+    opCodeDictionary.insert(make_pair("sleu", "000000"));
+    opCodeDictionary.insert(make_pair("sgeu", "000000"));
+    opCodeDictionary.insert(make_pair("add", "000000"));
+    opCodeDictionary.insert(make_pair("addu", "000000"));
+    opCodeDictionary.insert(make_pair("sub", "000000"));
+    opCodeDictionary.insert(make_pair("subu", "000000"));
+    opCodeDictionary.insert(make_pair("and", "000000"));
+    opCodeDictionary.insert(make_pair("or", "000000"));
+    opCodeDictionary.insert(make_pair("xor", "000000"));
+    opCodeDictionary.insert(make_pair("seq", "000000"));
+    opCodeDictionary.insert(make_pair("sne", "000000"));
+    opCodeDictionary.insert(make_pair("slt", "000000"));
+    opCodeDictionary.insert(make_pair("sgt", "000000"));
+    opCodeDictionary.insert(make_pair("sle", "000000"));
+    opCodeDictionary.insert(make_pair("sge", "000000"));
     
     return opCodeDictionary;
 }
 
 map<string, string> functionDictionary() {
     map<string, string> functionDictionary;
-    insertM(functionDictionary, "sll", "00000000100");
-    insertM(functionDictionary, "srl", "00000000110");
-    insertM(functionDictionary, "sra", "00000000111");
-    insertM(functionDictionary, "sltu", "00000010010");
-    insertM(functionDictionary, "sgtu", "00000010011");
-    insertM(functionDictionary, "sleu", "00000010100");
-    insertM(functionDictionary, "sgeu", "00000010101");
-    insertM(functionDictionary, "add", "00000100000");
-    insertM(functionDictionary, "addu", "00000100001");
-    insertM(functionDictionary, "sub", "00000100010");
-    insertM(functionDictionary, "subu", "00000100011");
-    insertM(functionDictionary, "and", "00000100100");
-    insertM(functionDictionary, "or", "00000100101");
-    insertM(functionDictionary, "xor", "00000100110");
-    insertM(functionDictionary, "seq", "00000101000");
-    insertM(functionDictionary, "sne", "00000101001");
-    insertM(functionDictionary, "slt", "00000101010");
-    insertM(functionDictionary, "sgt", "00000101011");
-    insertM(functionDictionary, "sle", "00000101100");
-    insertM(functionDictionary, "sge", "00000101101");
+    functionDictionary.insert(make_pair("sll", "00000000100"));
+    functionDictionary.insert(make_pair("srl", "00000000110"));
+    functionDictionary.insert(make_pair("sra", "00000000111"));
+    functionDictionary.insert(make_pair("sltu", "00000010010"));
+    functionDictionary.insert(make_pair("sgtu", "00000010011"));
+    functionDictionary.insert(make_pair("sleu", "00000010100"));
+    functionDictionary.insert(make_pair("sgeu", "00000010101"));
+    functionDictionary.insert(make_pair("add", "00000100000"));
+    functionDictionary.insert(make_pair("addu", "00000100001"));
+    functionDictionary.insert(make_pair("sub", "00000100010"));
+    functionDictionary.insert(make_pair("subu", "00000100011"));
+    functionDictionary.insert(make_pair("and", "00000100100"));
+    functionDictionary.insert(make_pair("or", "00000100101"));
+    functionDictionary.insert(make_pair("xor", "00000100110"));
+    functionDictionary.insert(make_pair("seq", "00000101000"));
+    functionDictionary.insert(make_pair("sne", "00000101001"));
+    functionDictionary.insert(make_pair("slt", "00000101010"));
+    functionDictionary.insert(make_pair("sgt", "00000101011"));
+    functionDictionary.insert(make_pair("sle", "00000101100"));
+    functionDictionary.insert(make_pair("sge", "00000101101"));
     return functionDictionary;
 }
 
@@ -139,12 +154,13 @@ string clearEXTRA_WHITE_SPACE(string str) {
 
 //this is a prototype, the official one will take a string parameter
 //and write that as a new line to a text file
-ofstream writeToFile(){
-    ofstream file("sample.txt");
+ofstream writeToFile(string fileName, string lineToWrite, bool closeFile){
+    ofstream file;
+    file.open(fileName, ios::out | ios::app);
     if(file.is_open()) {
-        file << "add r1, r2, r3\n";
-        file << "add r2, r2, r2\n";
-        file << endl;
+        file << lineToWrite + "\n";
+    } 
+    if(closeFile == true) {
         file.close();
     }
     return file;
@@ -162,29 +178,7 @@ string returnOPCODE(string asmInstruction) {
     return instruction;
 }
 
-map<string, int> getLabelLineNumber(string filename) {
-    string str;
-    ifstream file(filename);
-    map<string, int> labelLineNumber;
-    int lineNumber = 0;
-    if(file.is_open()) {
-        while(getline(file, str)) {
-            for(int i = 0; i < str.length(); i++) {
-                if(str[i] == ':') {
-                    str[i] = '\0';
-                    labelLineNumber.insert(make_pair(str, lineNumber));
-                }
-            }
-            lineNumber++;
-        }
-        file.close();
-    } else {
-        return {{"null", 0}};
-    }
-    return labelLineNumber;
-}
-
-int *parseOutRegNumber(string str) {
+int *parseIntFromAlphaNumeric(string str) {
     int count = 0;
     str = str + ' ';
     for(int i = 0; i < str.length(); i++) {
@@ -257,117 +251,65 @@ string stringToLower(string str) {
     return lowerSTR;
 }
 
-void buildInstruction(int portionNumber, int startIndex, string instruction, string _asm, int lineNumber) {
-    _asm = clearEXTRA_WHITE_SPACE(_asm);
-    _asm = stringToLower(_asm);
-    string portion;
-    for(int i = 0; i < _asm.length(); i++) {
-        //this part is done
-        if(startIndex == 0) {
-            //Just the opcode... same for all instructions, start
-            //index is 0, no need to increment i by start index.
-            if(_asm[i] == ' ') {
-                startIndex = i + 1;
-                break;
-            } else {
-                portion += _asm[i];
-            }
-            portion = getCodeFromDictionary(opDictionary(), portion);
-            instruction += portion;
-            portionNumber++;
-    
-        } else if(instruction.compare("000000") == 0) {
-            //R-Type Instructions, have to add more logic for third register
-            if(_asm[startIndex + i] == ',') {
-                startIndex = startIndex + i + 1;
-                break;
-            } else {
-                portion += _asm[startIndex + i];
-            }
-            
-        } else {
-            
-            //I-Type Instructions
-            if(_asm[0] == 'b') {
-                if(portionNumber == 1) {
-                    //parse out the register number
-                    portionNumber++;
-                } else {
-                    //label
-                    portionNumber++;
-                }
-                
-                
-            } else if((_asm[0] + _asm[1] == 's' + 'h') || (_asm[0] + _asm[1] == 's' + 'b') || (_asm[0] + _asm[1] == 's' + 'w')) {
-                //this is my store instructions, only ones where RS1 doesnt flip with RS2 (Easier encoding)
-                if(portionNumber == 1 || portionNumber == 2) {
-                    //parse out the register number,
-                    //in the case of load/store, add a white space
-                    if(_asm[startIndex + i] == ',') {
-                        startIndex = startIndex + i + 1;
-                        break;
-                    } else {
-                        portion += _asm[startIndex + i];
-                    }
-                    
-                } else {
-                    //were either at the end of line, or
-                    //were a math instruction, in this case we get the immediate
-                    
-                }
-                portionNumber++;
-                
-            } else {
-                
-                if(portionNumber == 1 || portionNumber == 2) {
-                    //parse out the register number,
-                    //in the case of load/store, add a white space
-                    if(_asm[startIndex + i] == ',') {
-                        startIndex = startIndex + i + 1;
-                        break;
-                    } else {
-                        portion += _asm[startIndex + i];
-                    }
-                    
-                } else {
-                    //were either at the end of line, or
-                    //were a math instruction, in this case we get the immediate
-                }
-                portionNumber++;
-            }
+int getLineNumber(string filename, string line) {
+    string str;
+    ifstream file(filename);
+    map<string, int> labelLineNumber;
+    int lineNumber = 0;
+    if(file.is_open()) {
+        while(getline(file, str)) {
+            labelLineNumber.insert(make_pair(stringToLower(str), lineNumber));
+            lineNumber++;
         }
-    }
-    if(_asm[startIndex] == '\0') {
-        writeToFile();
+        file.close();
     } else {
-        buildInstruction(portionNumber, startIndex, instruction, _asm, lineNumber);
+        return -1;
     }
+    return labelLineNumber[line];
 }
 
-void buildInstruction2(string _asm) {
-    _asm = clearEXTRA_WHITE_SPACE(_asm);
-    _asm = stringToLower(_asm);
-    map<string, string> portionsOf_asm;
-    for(int i = 0; i < _asm.length(); i++) {
-        if(_asm[i] == ' ' || _asm[i] == ',') {
-            break;
-        } else {
-            
+string reverseString(string toReverse) {
+    string reversed = "";
+    for(int i = 0; i < toReverse.length(); i++) {
+        char x = toReverse[toReverse.length() - (i+1)];
+        //cout << x << "\n";
+        reversed += x;
+    }
+    return reversed;
+}
+
+string intToBinary(int _int, int length) {
+    string binaryString = "";
+    while(_int >= 1) {
+        binaryString += to_string(_int % 2);
+        _int = _int - (_int % 2);
+        _int = _int / 2;
+    }
+    binaryString = reverseString(binaryString);
+    if(binaryString.length() < length) {
+        for(int i = 0; i < binaryString.length() - length; i++) {
+            binaryString.insert(0, "0");
         }
     }
+    return binaryString;
+}
 
-    map<string, string> instruction;
-    insertM(instruction, "opCode", getCodeFromDictionary(opDictionary(), returnOPCODE()));
-    if(instruction.find("opCode")->second == "000000") {
-        //do R Typed
-    } else {
-        if(_asm[0] == 'b') {
+string returnBinFromAlphaNumeric(string reg, int length) {
+    string numberFromReg = "";
+    stringstream hexOfReg;
+    string _hex = "";
 
+    int regNumber = 0;
+    for(int i = 0; i < reg.length(); i++) {
+        if(isInt(reg[i]) == 0) {
+            numberFromReg += reg[i];
         }
     }
-    insertM(instruction, "RS1", /*getRS1*/);
-    insertM(instruction, "RS2", /*getRS2*/);
-    insertM(instruction, "IMM", /*getIMM*/);
+    for(int i = 0; i < numberFromReg.length(); i++) {
+        regNumber += pow(10, numberFromReg.length() - (i + 1)) * (numberFromReg[i] - 48);
+    }
+
+    return intToBinary(regNumber, length);
 }
 
 void readFromFile(string fileName) {
@@ -377,7 +319,7 @@ void readFromFile(string fileName) {
     if(file.is_open()) {
         while(getline(file, str)) {
             cout << str << "\n";
-            buildInstruction(0, 0, "", str, lineNumber);
+            //buildInstruction(0, 0, "", str, lineNumber);
             lineNumber++;
         }
         file.close();
@@ -412,38 +354,149 @@ string returnHexFromBin(string binString) {
     return hexString;
 }
 
+bool checkIfContainsR(string str) {
+    for(int i = 0; i < str.length(); i++) {
+        if(str[i] == 'r') {
+            return true;
+        }
+    }
+    return false;
+}
 
-int main() {
-    
-    //    //iterate through map
-    //    map<string, int> test = getLabelLineNumber("sample.txt");
-    //    for(map<string, int>::iterator it = test.begin(); it != test.end(); ++it) {
-    //        cout << "Key: " << it->first << ", Value: " << it->second << "\n";
-    //    }
-    //
-    //    //check if map contains value
-    //    map<string, string> a = functionDictionary();
-    //    if(a.find("plasdf") != a.end()) {
-    //        cout << "found";
-    //    } else {
-    //        cout << "not found";
-    //    }
-    //
-    //    //checking IO of CHARS
-    //    char x = 0x30;
-    //    //does my algorithm work?
-    //    cout << parseOutRegNumber("4(r31)") << "\n";
-    //    cout << x << "\n";
-    //    //yes it does, now checking it for larger inputs. it works.
-    //    int i = 0;
-    //    int *array = parseOutRegNumber("93, 6, 77, 104, 99");
-    //    string x;
-    //    while(*(array + i) != -1) {
-    //        cout << hex << *(array + i) << '\n';
-    //        i++;
-    //    }
+void buildInstruction2(string _asm, string fileName) {
+    int currentLineNumber = getLineNumber(fileName, _asm);
+    _asm = clearEXTRA_WHITE_SPACE(_asm);
+    _asm = stringToLower(_asm);
+    bool isLabel = false;
+    string portion = "";
+    string finalInstruction = "";
+    int part = 0;
+    map<string, string> portionsOf_asm;
+    for(int i = 0; i < _asm.length(); i++) {
+        if(_asm[i] == ' ' || _asm[i] == ',') {
+            portionsOf_asm.insert(make_pair("Part " + to_string(part), portion));
+            portion = "";
+            part++;
+        } else if(_asm[i + 1] == '\0') {
+            portion += _asm[i];
+            portionsOf_asm.insert(make_pair("Part " + to_string(part), portion));
+            portion = "";
+            part = 0;
+        } else {
+            portion += _asm[i];
+        }
+    }
+    for(int i = 0; i < _asm.length(); i++) {
+        if(_asm[i] == ':') {
+            isLabel = true;
+            break;
+        }
+    }
+    for(map<string, string>::iterator it = portionsOf_asm.begin(); it != portionsOf_asm.end(); ++it) {
+        cout << "Key: " << it->first << ", Value: " << it->second << "\n";
+    }
+
+    map<string, string> instruction;
+    if(isLabel == true) {
+        instruction.insert(make_pair("Part 0", intToBinary(getLineNumber(fileName, _asm) * 4, 32)));
+    } else {
+        instruction.insert(make_pair("Part 0", getCodeFromDictionary(opDictionary(), portionsOf_asm["Part 0"])));
+    }
+    cout << instruction["Part 0"] << "\n";
+    if(isLabel == true) {
         
-    //    cout << stringToLower("This IS A String with 1234## and Letters") << "\n";
+    } else if(instruction["Part 0"] == "000000") {
+        instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 2"], 5)));
+        instruction.insert(make_pair("Part 2", returnBinFromAlphaNumeric(portionsOf_asm["Part 3"], 5)));
+        instruction.insert(make_pair("Part 3", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
+        instruction.insert(make_pair("Part 4", getCodeFromDictionary(functionDictionary(), returnOPCODE(_asm))));
+    } else {
+        if(_asm[0] == 'b') {
+            instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
+            instruction.insert(make_pair("Part 2", "00000"));
+            int dLineNumber = 4 * (getLineNumber(fileName, portionsOf_asm["Part 2"] + ":") - currentLineNumber);
+            instruction.insert(make_pair("Part 3", intToBinary(dLineNumber, 16)));
+        } else if(_asm[0] == 'j') {
+            if(checkIfContainsR(_asm) == true) {
+                string registerBin = returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 26);
+                instruction.insert(make_pair("Part 1", registerBin));
+            } else {
+                instruction.insert(make_pair("Part 1", intToBinary(getLineNumber(fileName, portionsOf_asm["Part 1"] + ":"), 26)));
+            }
+        } else if(_asm[0] + _asm[1] == 's' + 'h' || _asm[0] + _asm[1] == 's' + 'b' || _asm[0] + _asm[1] == 's' + 'w') {
+
+
+            int *registerImmediate = parseIntFromAlphaNumeric(portionsOf_asm["Part 1"]);
+            int immediate = *(registerImmediate);
+            int _register = *(registerImmediate + 1);
+            instruction.insert(make_pair("Part 1", intToBinary(_register, 5)));
+            instruction.insert(make_pair("Part 2", returnBinFromAlphaNumeric(portionsOf_asm["Part 2"], 5)));
+            instruction.insert(make_pair("Part 3", intToBinary(immediate, 16)));
+
+        } else {
+            instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
+            int *part2 = parseIntFromAlphaNumeric(portionsOf_asm["Part 2"]);
+            int length = 1;
+            int i = 0;
+            while(*(part2 + i) != -1) {
+                i++;
+                length++;
+            }
+            if(length == 3) {
+                int immediate = *(part2);
+                int _register = *(part2 + 1);
+                instruction.insert(make_pair("Part 2", intToBinary(_register, 5)));
+                instruction.insert(make_pair("Part 3", intToBinary(immediate, 16)));
+            } else {
+                instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
+                instruction.insert(make_pair("Part 2", returnBinFromAlphaNumeric(portionsOf_asm["Part 2"], 5)));
+                int *immediate = parseIntFromAlphaNumeric(portionsOf_asm["Part 3"]);
+                instruction.insert(make_pair("Part 3", intToBinary(*immediate, 16)));
+            }
+
+
+        }
+    }
+
+    for(map<string, string>::iterator it = instruction.begin(); it != instruction.end(); ++it) {
+            cout << "Key: " << it->first << ", Value: " << it->second << "\n";
+        finalInstruction += it->second;
+    }
+    cout << finalInstruction << "\n";
+    writeToFile("bin.txt", finalInstruction, false);
+    cout << finalInstruction.length() << "\n";
+    cout << returnHexFromBin(finalInstruction) << "\n";
+    finalInstruction = returnHexFromBin(finalInstruction);
+    writeToFile("hex.txt", finalInstruction, false);
+}
+
+
+int main(int argc, char * argv[]) {
+    ofstream binFile("bin.txt");
+    ofstream hexFile("hex.txt");
+    string inputFileName;
+    if(*argv == nullptr) {
+        cout << "What is the name of your input file?" << "\n";
+        cin >> inputFileName;
+    } else {
+        inputFileName = *argv;
+        cout << inputFileName << "\n";
+    }
+    string readLine = "";
+    ifstream inputFile(inputFileName);
+    if(inputFile.is_open()) {
+        while(getline(inputFile, readLine)) {
+            buildInstruction2(readLine, inputFileName);
+        }
+        inputFile.close();
+    } else {
+        cout << "No file with that name" << "\n";
+    }
+
+    writeToFile("bin.txt", "\0", true);
+    writeToFile("hex.txt", "\0", true);
+
+
     
     return 0;
 }
