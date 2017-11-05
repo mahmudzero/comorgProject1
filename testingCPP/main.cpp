@@ -182,8 +182,8 @@ int *parseIntFromAlphaNumeric(string str) {
     int count = 0;
     str = str + ' ';
     for(int i = 0; i < str.length(); i++) {
-        if((str[i] >= '0') && (str[i] <= '9')) {
-            //count++;
+        if(((str[i] >= '0') && (str[i] <= '9')) || (str[i] == '-' && ((str[i+1] >= '0') && (str[i+1] <= '9')))) {
+            
         } else {
             str[i] = ' ';
         }
@@ -211,22 +211,45 @@ int *parseIntFromAlphaNumeric(string str) {
     numbers[nextAvailablePosition] = 0;
     string intermediate;
     while(str[i] != '\0') {
-        if(isInt(str[i]) == 0) {
-            for(int j = i; j < str.length(); j++) {
-                if(isInt(str[j]) == 1) {
-                    for(int k = i; k < j; k++) {
-                        intermediate += str[k];
+        if(str[i] == '-') {
+            if(isInt(str[i + 1]) == 0) {
+                for(int j = i + 1; j < str.length(); j++) {
+                    if(isInt(str[j]) == 1) {
+                        for(int k = i + 1; k < j; k++) {
+                            intermediate += str[k];
+                        }
+                        for(int k = 0; k < intermediate.length(); k++) {
+                            //int l = intermediate.length();
+                            //int blah = pow(10, intermediate.length() - (k + 1)) * (intermediate[k] - 48);
+                            numbers[nextAvailablePosition] += pow(10, intermediate.length() - (k + 1)) * (intermediate[k] - 48);
+                        }
+                        numbers[nextAvailablePosition] *= -1;
+                        nextAvailablePosition++;
+                        numbers[nextAvailablePosition] = 0;
+                        i = j - 1;
+                        intermediate.clear();
+                        break;
                     }
-                    for(int k = 0; k < intermediate.length(); k++) {
-                        //int l = intermediate.length();
-                        //int blah = pow(10, intermediate.length() - (k + 1)) * (intermediate[k] - 48);
-                        numbers[nextAvailablePosition] += pow(10, intermediate.length() - (k + 1)) * (intermediate[k] - 48);
+                }
+            }
+        } else {
+            if(isInt(str[i]) == 0) {
+                for(int j = i; j < str.length(); j++) {
+                    if(isInt(str[j]) == 1) {
+                        for(int k = i; k < j; k++) {
+                            intermediate += str[k];
+                        }
+                        for(int k = 0; k < intermediate.length(); k++) {
+                            //int l = intermediate.length();
+                            //int blah = pow(10, intermediate.length() - (k + 1)) * (intermediate[k] - 48);
+                            numbers[nextAvailablePosition] += pow(10, intermediate.length() - (k + 1)) * (intermediate[k] - 48);
+                        }
+                        nextAvailablePosition++;
+                        numbers[nextAvailablePosition] = 0;
+                        i = j - 1;
+                        intermediate.clear();
+                        break;
                     }
-                    nextAvailablePosition++;
-                    numbers[nextAvailablePosition] = 0;
-                    i = j - 1;
-                    intermediate.clear();
-                    break;
                 }
             }
         }
@@ -279,17 +302,42 @@ string reverseString(string toReverse) {
 }
 
 string intToBinary(int _int, int length) {
+    uint64_t x;
+    string appendage;
+    if(_int < 0) {
+        x = -1 * _int;
+        x = ~x;
+        //cout << "x: " << x << endl;
+        //cout << x % 2 << "\n";
+        /*if((_int * -1) % 2 == 1) {
+            x -= 2;
+            int power = ceil((log(x+2)/log(2)));
+            int numToAdd = pow(2, power + 1);
+            x += numToAdd;
+        }*/
+        x++;
+        appendage = "1";
+    } else {
+        x = _int;
+        appendage = "0";
+    }
     string binaryString = "";
-    while(_int >= 1) {
-        binaryString += to_string(_int % 2);
-        _int = _int - (_int % 2);
-        _int = _int / 2;
+    while(x >= 1) {
+        binaryString += to_string(x % 2);
+        x = x - (x % 2);
+        x = x / 2;
     }
     binaryString = reverseString(binaryString);
     if(binaryString.length() < length) {
         for(int i = 0; i < binaryString.length() - length; i++) {
-            binaryString.insert(0, "0");
+            binaryString.insert(0, appendage);
         }
+    } else if(binaryString.length() > length) {
+        string intermediate;
+        for(int i = 0; i < length; i ++) {
+            intermediate += binaryString[binaryString.length() - (i + 1)];
+        }
+        binaryString = reverseString(intermediate);
     }
     return binaryString;
 }
@@ -364,9 +412,9 @@ bool checkIfContainsR(string str) {
 }
 
 void buildInstruction2(string _asm, string fileName) {
+    _asm = stringToLower(_asm);
     int currentLineNumber = getLineNumber(fileName, _asm);
     _asm = clearEXTRA_WHITE_SPACE(_asm);
-    _asm = stringToLower(_asm);
     bool isLabel = false;
     string portion = "";
     string finalInstruction = "";
@@ -415,13 +463,16 @@ void buildInstruction2(string _asm, string fileName) {
             instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
             instruction.insert(make_pair("Part 2", "00000"));
             int dLineNumber = 4 * (getLineNumber(fileName, portionsOf_asm["Part 2"] + ":") - currentLineNumber);
+            cout << "LOOK HERE YOU CUNT LOOK HEEREERER  CURRENT NUMBER   " << currentLineNumber << "\n";
+            cout << "LOOK HERE YOU CUNT LOOK HEEREERER  DLINE NUMBER   " << dLineNumber << "\n";
             instruction.insert(make_pair("Part 3", intToBinary(dLineNumber, 16)));
         } else if(_asm[0] == 'j') {
-            if(checkIfContainsR(_asm) == true) {
-                string registerBin = returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 26);
+            if(checkIfContainsR(returnOPCODE(_asm)) == true) {
+                string registerBin = returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5);
                 instruction.insert(make_pair("Part 1", registerBin));
+                instruction.insert(make_pair("Part 2", intToBinary(0, 21)));
             } else {
-                instruction.insert(make_pair("Part 1", intToBinary(getLineNumber(fileName, portionsOf_asm["Part 1"] + ":"), 26)));
+                instruction.insert(make_pair("Part 1", intToBinary(4 * (getLineNumber(fileName, portionsOf_asm["Part 1"] + ":") - currentLineNumber), 26)));
             }
         } else if(_asm[0] + _asm[1] == 's' + 'h' || _asm[0] + _asm[1] == 's' + 'b' || _asm[0] + _asm[1] == 's' + 'w') {
 
@@ -434,7 +485,6 @@ void buildInstruction2(string _asm, string fileName) {
             instruction.insert(make_pair("Part 3", intToBinary(immediate, 16)));
 
         } else {
-            instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
             int *part2 = parseIntFromAlphaNumeric(portionsOf_asm["Part 2"]);
             int length = 1;
             int i = 0;
@@ -445,11 +495,12 @@ void buildInstruction2(string _asm, string fileName) {
             if(length == 3) {
                 int immediate = *(part2);
                 int _register = *(part2 + 1);
+                instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
                 instruction.insert(make_pair("Part 2", intToBinary(_register, 5)));
                 instruction.insert(make_pair("Part 3", intToBinary(immediate, 16)));
             } else {
-                instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
-                instruction.insert(make_pair("Part 2", returnBinFromAlphaNumeric(portionsOf_asm["Part 2"], 5)));
+                instruction.insert(make_pair("Part 1", returnBinFromAlphaNumeric(portionsOf_asm["Part 2"], 5)));
+                instruction.insert(make_pair("Part 2", returnBinFromAlphaNumeric(portionsOf_asm["Part 1"], 5)));
                 int *immediate = parseIntFromAlphaNumeric(portionsOf_asm["Part 3"]);
                 instruction.insert(make_pair("Part 3", intToBinary(*immediate, 16)));
             }
@@ -472,31 +523,31 @@ void buildInstruction2(string _asm, string fileName) {
 
 
 int main(int argc, char * argv[]) {
-    ofstream binFile("bin.txt");
-    ofstream hexFile("hex.txt");
-    string inputFileName;
-    if(*argv == nullptr) {
-        cout << "What is the name of your input file?" << "\n";
-        cin >> inputFileName;
-    } else {
-        inputFileName = *argv;
-        cout << inputFileName << "\n";
-    }
-    string readLine = "";
-    ifstream inputFile(inputFileName);
-    if(inputFile.is_open()) {
-        while(getline(inputFile, readLine)) {
-            buildInstruction2(readLine, inputFileName);
-        }
-        inputFile.close();
-    } else {
-        cout << "No file with that name" << "\n";
-    }
-
-    writeToFile("bin.txt", "\0", true);
-    writeToFile("hex.txt", "\0", true);
-
-
+//    ofstream binFile("bin.txt");
+//    ofstream hexFile("hex.txt");
+//    string inputFileName;
+//    if(*(argv + 1) == nullptr) {
+//        cout << "What is the name of your input file?" << "\n";
+//        cin >> inputFileName;
+//    } else {
+//        inputFileName = *(argv + 1);
+//        cout << "FILE NAME & PATH" << "\n";
+//        cout << inputFileName << "\n";
+//    }
+//    string readLine = "";
+//    ifstream inputFile(inputFileName);
+//    if(inputFile.is_open()) {
+//        while(getline(inputFile, readLine)) {
+//            buildInstruction2(readLine, inputFileName);
+//        }
+//        inputFile.close();
+//    } else {
+//        cout << "No file with that name" << "\n";
+//    }
+//
+//    writeToFile("bin.txt", "\0", true);
+//    writeToFile("hex.txt", "\0", true);
+    buildInstruction2("add r0, r0, r0", "sample.txt");
     
     return 0;
 }
